@@ -1,0 +1,5 @@
+1  TWITTER_API_KEY=your_twitter_api_key
+2  TWITTER_API_SECRET=your_twitter_api_secret
+3  TWITTER_ACCESS_TOKEN=your_twitter_access_token
+4  TWITTER_ACCESS_SECRET=your_twitter_access_secret
+5  COINGECKO_API_URL=https://api.coingecko.com/api/v3/simple/price
