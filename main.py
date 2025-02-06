@@ -1,19 +1,26 @@
-from saya_bot import start_telegram_bot
-from ai_trading import auto_trade
-from solana_trade import execute_trade
+import telebot
+from flask import Flask, request
+import os
+
+# Load environment variables
+TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+bot = telebot.TeleBot(TOKEN)
+app = Flask(__name__)
+
+@app.route('/' + TOKEN, methods=['POST'])
+def getMessage():
+    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+    return "!", 200
+
+@app.route("/")
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url='https://your-render-url.onrender.com/' + TOKEN)
+    return "Webhook set!", 200
+
+@bot.message_handler(commands=['start'])
+def send_welcome(message):
+    bot.reply_to(message, "🔥 MiningNexus AI Trading Bot is LIVE! 🔥")
 
 if __name__ == "__main__":
-    print("Starting Saya...")
-
-    # Start Telegram bot
-    start_telegram_bot()
-
-    # Start AI trading
-    signal = auto_trade()
-    print(signal)
-
-    # Example: Execute trade if there's a buy signal
-    if "Buy Signal" in signal:
-        print("Executing trade...")
-        trade_result = execute_trade(amount=0.1, recipient="YourRecipientWalletAddress")
-        print(f"Trade successful: {trade_result}")
+    app.run(host="0.0.0.0", port=10000)
