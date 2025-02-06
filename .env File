@@ -3,3 +3,6 @@
 3  TWITTER_ACCESS_TOKEN=your_twitter_access_token
 4  TWITTER_ACCESS_SECRET=your_twitter_access_secret
 5  COINGECKO_API_URL=https://api.coingecko.com/api/v3/simple/price
+# Telegram Bot Token
+TELEGRAM_BOT_TOKEN=your_telegram_bot_token_here
+SOLANA_PRIVATE_KEY=your_solana_private_key_here
